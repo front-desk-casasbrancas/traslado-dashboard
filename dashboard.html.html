@@ -8,10 +8,10 @@
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
-            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
-            background: #e5e7eb;
+            font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, 'Helvetica Neue', Arial, sans-serif;
+            background: #f5f5f0;
             padding: 20px;
-            color: #1f2937;
+            color: #2c3e2f;
         }
         .container { max-width: 1400px; margin: 0 auto; }
         .tabs {
@@ -22,13 +22,18 @@
         }
         .tab-btn {
             background: white;
-            border: none;
+            border: 1px solid #d4cbb8;
             padding: 10px 20px;
             border-radius: 40px;
-            font-weight: 600;
+            font-weight: 500;
             cursor: pointer;
+            color: #5a6e4a;
         }
-        .tab-btn.active { background: #0f3b2c; color: white; }
+        .tab-btn.active {
+            background: #2c5f2d;
+            border-color: #2c5f2d;
+            color: white;
+        }
         .tab-content { display: none; }
         .tab-content.active { display: block; }
         .dashboard-grid {
@@ -39,31 +44,33 @@
         }
         .metric-card {
             background: white;
-            border-radius: 24px;
+            border-radius: 16px;
             padding: 20px;
             text-align: center;
+            border: 1px solid #e8e0d8;
         }
-        .metric-value { font-size: 2rem; font-weight: 700; color: #0f3b2c; }
-        .metric-label { font-size: 0.8rem; color: #6b7280; margin-top: 6px; }
+        .metric-value { font-size: 2rem; font-weight: 600; color: #2c5f2d; }
+        .metric-label { font-size: 0.8rem; color: #7a8b6e; margin-top: 6px; }
         .table-container {
             background: white;
-            border-radius: 24px;
+            border-radius: 16px;
             padding: 20px;
             overflow-x: auto;
             margin-bottom: 20px;
+            border: 1px solid #e8e0d8;
         }
         table { width: 100%; border-collapse: collapse; }
-        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #e2e8f0; font-size: 0.85rem; }
-        th { background: #f9fafb; font-weight: 600; color: #0f3b2c; }
-        .month-group td { background: #e6f4ea; padding: 12px; font-weight: 700; color: #0f3b2c; }
+        th, td { padding: 10px 12px; text-align: left; border-bottom: 1px solid #ebe5db; font-size: 0.85rem; }
+        th { background: #fafaf7; font-weight: 600; color: #2c5f2d; }
+        .month-group td { background: #e8f0e5; padding: 12px; font-weight: 600; color: #2c5f2d; }
         .comissao-card {
-            background: linear-gradient(135deg, #0f3b2c, #1a5c44);
+            background: linear-gradient(135deg, #2c5f2d, #1e4520);
             color: white;
-            border-radius: 24px;
+            border-radius: 16px;
             padding: 24px;
             margin-bottom: 20px;
         }
-        .comissao-valor { font-size: 2.5rem; font-weight: 700; }
+        .comissao-valor { font-size: 2.5rem; font-weight: 600; }
         .comissao-periodo { display: flex; gap: 16px; margin-top: 16px; flex-wrap: wrap; }
         .periodo-btn {
             background: rgba(255,255,255,0.2);
@@ -73,9 +80,9 @@
             color: white;
             cursor: pointer;
         }
-        .periodo-btn.active { background: #fbbf24; color: #0f3b2c; font-weight: 600; }
+        .periodo-btn.active { background: #c8b88a; color: #2c5f2d; font-weight: 600; }
         .refresh-btn {
-            background: #0f3b2c;
+            background: #2c5f2d;
             color: white;
             border: none;
             padding: 10px 20px;
@@ -90,13 +97,12 @@
             border-radius: 40px;
             cursor: pointer;
             font-size: 0.75rem;
-            font-weight: 500;
         }
         .confirm-btn:hover { background: #128C7E; }
-        .last-update { font-size: 0.8rem; color: #6b7280; margin-bottom: 16px; }
+        .last-update { font-size: 0.8rem; color: #7a8b6e; margin-bottom: 16px; }
         .error-message {
-            background: #fee2e2;
-            color: #991b1b;
+            background: #faecec;
+            color: #b85c5a;
             padding: 16px;
             border-radius: 16px;
             margin-bottom: 20px;
@@ -112,21 +118,20 @@
         }
         @media (max-width: 768px) {
             .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-            .confirm-btn { padding: 4px 8px; font-size: 0.7rem; }
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="tabs">
-        <button class="tab-btn active" data-tab="dashboard">📊 Dashboard</button>
-        <button class="tab-btn" data-tab="comissao">💰 Comissões (15%)</button>
-        <button class="tab-btn" data-tab="lista">📋 Lista de Transfers</button>
+        <button class="tab-btn active" data-tab="dashboard">Dashboard</button>
+        <button class="tab-btn" data-tab="comissao">Comissões (15%)</button>
+        <button class="tab-btn" data-tab="lista">Lista de Transfers</button>
     </div>
 
     <div class="header-actions">
-        <div class="last-update" id="lastUpdate">🔄 Clique em "Atualizar" para carregar os dados</div>
-        <button class="refresh-btn" id="refreshBtn">🔄 Atualizar Dados da Planilha</button>
+        <div class="last-update" id="lastUpdate">Clique em "Atualizar" para carregar os dados</div>
+        <button class="refresh-btn" id="refreshBtn">Atualizar Dados da Planilha</button>
     </div>
 
     <div id="errorDisplay" class="error-message"></div>
@@ -139,22 +144,22 @@
             <div class="metric-card"><div class="metric-value" id="topVehicle">-</div><div class="metric-label">Veículo + Solicitado</div></div>
             <div class="metric-card"><div class="metric-value" id="totalComissao">R$ -</div><div class="metric-label">Total em Comissões (15%)</div></div>
         </div>
-        <div class="table-container"><h3>📊 Traslados por Mês</h3><canvas id="monthlyChart" style="max-height: 250px;"></canvas></div>
-        <div class="table-container"><h3>🚗 Ranking de Veículos</h3><canvas id="vehicleChart" style="max-height: 250px;"></canvas></div>
+        <div class="table-container"><h3>Traslados por Mês</h3><canvas id="monthlyChart" style="max-height: 250px;"></canvas></div>
+        <div class="table-container"><h3>Ranking de Veículos</h3><canvas id="vehicleChart" style="max-height: 250px;"></canvas></div>
     </div>
 
     <div id="tab-comissao" class="tab-content">
         <div class="comissao-card">
-            <div style="font-size: 0.9rem; opacity: 0.9;">💰 Comissão de 15% sobre todos os traslados</div>
+            <div style="font-size: 0.9rem; opacity: 0.9;">Comissão de 15% sobre todos os traslados</div>
             <div class="comissao-valor" id="comissaoTotal">R$ -</div>
             <div class="comissao-periodo">
-                <button class="periodo-btn active" data-periodo="todos">📅 Todos</button>
-                <button class="periodo-btn" data-periodo="mesAtual">📆 Este mês</button>
-                <button class="periodo-btn" data-periodo="mesAnterior">📆 Mês passado</button>
-                <button class="periodo-btn" data-periodo="trimestre">📊 3 meses</button>
+                <button class="periodo-btn active" data-periodo="todos">Todos</button>
+                <button class="periodo-btn" data-periodo="mesAtual">Este mês</button>
+                <button class="periodo-btn" data-periodo="mesAnterior">Mês passado</button>
+                <button class="periodo-btn" data-periodo="trimestre">3 meses</button>
             </div>
         </div>
-        <div class="table-container"><h3>📋 Detalhamento por período</h3><div id="comissaoDetalhe"></div></div>
+        <div class="table-container"><h3>Detalhamento por período</h3><div id="comissaoDetalhe"></div></div>
     </div>
 
     <div id="tab-lista" class="tab-content">
@@ -162,39 +167,58 @@
             <div style="overflow-x: auto; max-height: 500px; overflow-y: auto;">
                 <table id="historyTable">
                     <thead>
-                        <tr>
-                            <th>Data/Hora</th>
-                            <th>Hóspede</th>
-                            <th>Telefone</th>
-                            <th>Sentido</th>
-                            <th>Veículo</th>
-                            <th>Data Viagem</th>
-                            <th>Horário</th>
-                            <th>Valor</th>
-                            <th>Confirmar</th>
-                        </thead>
+                        <tr><th>Data/Hora</th><th>Hóspede</th><th>Telefone</th><th>Sentido</th><th>Veículo</th><th>Data Viagem</th><th>Horário</th><th>Valor</th><th>Confirmar</th></tr>
+                    </thead>
                     <tbody id="historyBody">
-                        <tr><td colspan="9" style="text-align: center;">Carregando...<\/td><\/tr>
-                    <\/tbody>
-                <\/table>
-            <\/div>
-        <\/div>
-    <\/div>
-<\/div>
+                        <tr><td colspan="9" style="text-align: center;">Carregando...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <script>
     // ==================== CONFIGURAÇÃO ====================
-    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbwhC3m8vPSYYEoPe8cJdNYP12pj8Iu3V8zpSR-7XrRIyRp4hzo4gCkPgqGaMl1kze77/exec";
+    const WEBAPP_URL = "https://script.google.com/macros/s/AKfycbxEbaFYPp9LGdbg0R5C2ZJIqV85o7JiSuJWioQEUGI/dev";
     
     let transfers = [];
     let monthlyChart, vehicleChart;
     let currentPeriodo = 'todos';
 
+    // ==================== MENSAGENS POR IDIOMA ====================
+    const mensagens = {
+        pt: {
+            titulo: "TRANSFER CONFIRMED - CASAS BRANCAS\n\nYour request has been confirmed!",
+            detalhes: "Trip details:",
+            hospede: "Guest:",
+            reserva: "Reservation:",
+            data: "Date:",
+            horario: "Time:",
+            sentido: "Direction:",
+            veiculo: "Vehicle:",
+            bagagens: "Luggage:",
+            valor: "Total amount:",
+            pagamento: "Payment:",
+            politicas: "Transfer Service Policies",
+            obs1: "The driver will be waiting at the hotel lobby or airport arrivals area, with a sign bearing the hotel's name.",
+            obs2: "Payment must be made directly to the driver (credit card or cash).",
+            obs3: "Cancellations, changes or new bookings must be requested at least 24 hours in advance, otherwise the full amount will be charged.",
+            obs4: "Estimated travel time: 3h00 to 3h30, may vary during high season periods such as New Year's Eve, Carnival, holidays and high season.",
+            obs5: "For safety reasons, drivers strictly respect speed limits.",
+            obsImportantes: "Important Notes",
+            obsImp1: "This is a third-party service, and the hotel is not responsible for any issues.",
+            obsImp2: "We do not make transfer reservations through agencies or intermediaries. Requests must be made directly by the guest.",
+            obsImp3: "If you have any questions, please do not hesitate to contact us. We will be happy to help.",
+            agradecimento: "Thank you for choosing us!\nCasas Brancas Boutique Hotel"
+        }
+    };
+
     function mostrarErro(mensagem) {
         const errorDiv = document.getElementById('errorDisplay');
         errorDiv.style.display = 'block';
-        errorDiv.innerHTML = '❌ <strong>Erro ao carregar dados:<\/strong><br>' + mensagem + '<br><br>🔧 <strong>Soluções:<\/strong><br>• Verifique se a planilha está compartilhada como "Qualquer um com o link pode editar"<br>• Verifique se o Apps Script está implantado corretamente<br>• Clique em "Atualizar" para tentar novamente';
-        document.getElementById('lastUpdate').innerHTML = '❌ Erro ao carregar dados. Verifique a configuração.';
+        errorDiv.innerHTML = 'Erro ao carregar dados:<br>' + mensagem + '<br><br>Soluções:<br>• Verifique se a planilha está compartilhada<br>• Verifique se o Apps Script está implantado<br>• Clique em "Atualizar" para tentar novamente';
+        document.getElementById('lastUpdate').innerHTML = 'Erro ao carregar dados.';
     }
 
     function esconderErro() {
@@ -203,32 +227,19 @@
 
     async function carregarDados() {
         esconderErro();
-        document.getElementById('lastUpdate').innerHTML = '🔄 Carregando dados da planilha...';
+        document.getElementById('lastUpdate').innerHTML = 'Carregando dados da planilha...';
         
         try {
-            console.log("Tentando carregar de:", WEBAPP_URL);
             const response = await fetch(WEBAPP_URL);
-            
-            if (!response.ok) {
-                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
-            }
-            
+            if (!response.ok) throw new Error(`HTTP ${response.status}`);
             const dados = await response.json();
-            console.log("Dados recebidos:", dados);
-            
-            if (dados && dados.error) {
-                throw new Error(dados.error);
-            }
-            
+            if (dados && dados.error) throw new Error(dados.error);
             transfers = Array.isArray(dados) ? dados : [];
-            document.getElementById('lastUpdate').innerHTML = `✅ Atualizado: ${new Date().toLocaleString('pt-BR')} (${transfers.length} traslados)`;
-            
+            document.getElementById('lastUpdate').innerHTML = `Atualizado: ${new Date().toLocaleString('pt-BR')} (${transfers.length} traslados)`;
             updateDashboard();
             updateHistoryTable();
             updateComissaoTab(currentPeriodo);
-            
         } catch (erro) {
-            console.error('Erro detalhado:', erro);
             mostrarErro(erro.message);
             transfers = [];
             updateDashboard();
@@ -240,52 +251,41 @@
     function enviarConfirmacao(transfer) {
         const telefone = transfer["Telefone"] || "";
         if (!telefone) {
-            alert("❌ Cliente não tem telefone cadastrado!");
+            alert("Cliente não tem telefone cadastrado!");
             return;
         }
         
         const telefoneLimpo = telefone.replace(/\D/g, "");
         if (telefoneLimpo.length < 10) {
-            alert("❌ Número de telefone inválido!");
+            alert("Número de telefone inválido!");
             return;
         }
+        
+        const idioma = transfer["Idioma"] || "pt";
+        const t = mensagens[idioma] || mensagens.pt;
         
         const bag23 = transfer["Bagagem23kg"] || 0;
         const bag10 = transfer["Bagagem10kg"] || 0;
         const bagMao = transfer["BagagemMao"] || 0;
-        const bagagensTexto = `${bag23}x23kg, ${bag10}x10kg, ${bagMao}x mão`;
+        const bagagensTexto = `${bag23}x23kg, ${bag10}x10kg, ${bagMao}x carry-on`;
         
-        const mensagem = `🚐 *TRASLADO CONFIRMADO - CASAS BRANCAS* 🚐\n\n` +
-            `✅ *Sua solicitação foi confirmada!*\n\n` +
-            `📌 *Detalhes da viagem:*\n` +
-            `👤 Hóspede: ${transfer["Nome"] || "-"}\n` +
-            `🏷️ Reserva: ${transfer["Reserva"] || "-"}\n` +
-            `📅 Data: ${transfer["Data Viagem"] || "-"}\n` +
-            `⏰ Horário: ${transfer["Horário"] || "-"}\n` +
-            `📍 Sentido: ${transfer["Sentido"] || "-"}\n` +
-            `🚗 Veículo: ${transfer["Veículo"] || "-"}\n` +
-            `🧳 Bagagens: ${bagagensTexto}\n\n` +
-            `💰 *Valor total:* R$ ${(parseFloat(transfer["Valor Total"]) || 0).toLocaleString('pt-BR')}\n` +
-            `💳 Pagamento: ${transfer["Pagamento"] || "-"}\n\n` +
-            `---\n` +
-            `*📋 Políticas do Serviço de Transfer*\n\n` +
-            `✅ O motorista estará aguardando no lobby do hotel ou na área de desembarque do aeroporto, com uma placa contendo o nome do hotel.\n\n` +
-            `✅ O pagamento deve ser realizado diretamente ao motorista (cartão de crédito ou dinheiro).\n\n` +
-            `✅ Cancelamentos, alterações ou novas reservas devem ser solicitados com mínimo de 24 horas de antecedência, caso contrário será cobrado o valor integral.\n\n` +
-            `✅ Tempo estimado de viagem: 3h00 a 3h30, podendo variar em períodos de alta demanda como Réveillon, Carnaval, feriados e alta temporada.\n\n` +
-            `✅ Por questões de segurança, os motoristas respeitam rigorosamente os limites de velocidade.\n\n` +
-            `---\n` +
-            `*⚠️ Observações Importantes*\n\n` +
-            `ℹ️ Este é um serviço terceirizado, e o hotel não se responsabiliza por eventuais intercorrências.\n\n` +
-            `ℹ️ Não realizamos reservas de transfer por meio de agências ou intermediários. As solicitações devem ser feitas diretamente pelo hóspede.\n\n` +
-            `📞 Caso tenha alguma dúvida, por favor, não hesite em nos contatar. Teremos prazer em ajudar.\n\n` +
-            `---\n` +
-            `Agradecemos a preferência! 🌊\n` +
-            `Casas Brancas Boutique Hotel`;
+        const mensagem = `${t.titulo}\n\n` +
+            `${t.detalhes}\n` +
+            `${t.hospede} ${transfer["Nome"] || "-"}\n` +
+            `${t.reserva} ${transfer["Reserva"] || "-"}\n` +
+            `${t.data} ${transfer["Data Viagem"] || "-"}\n` +
+            `${t.horario} ${transfer["Horário"] || "-"}\n` +
+            `${t.sentido} ${transfer["Sentido"] || "-"}\n` +
+            `${t.veiculo} ${transfer["Veículo"] || "-"}\n` +
+            `${t.bagagens} ${bagagensTexto}\n\n` +
+            `${t.valor} R$ ${(parseFloat(transfer["Valor Total"]) || 0).toLocaleString('pt-BR')}\n` +
+            `${t.pagamento} ${transfer["Pagamento"] || "-"}\n\n` +
+            `---\n${t.politicas}\n\n` +
+            `- ${t.obs1}\n\n- ${t.obs2}\n\n- ${t.obs3}\n\n- ${t.obs4}\n\n- ${t.obs5}\n\n---\n${t.obsImportantes}\n\n` +
+            `- ${t.obsImp1}\n\n- ${t.obsImp2}\n\n- ${t.obsImp3}\n\n---\n${t.agradecimento}`;
         
         const msgCodificada = encodeURIComponent(mensagem);
-        const url = `https://wa.me/${telefoneLimpo}?text=${msgCodificada}`;
-        window.open(url, '_blank');
+        window.open(`https://wa.me/${telefoneLimpo}?text=${msgCodificada}`, '_blank');
     }
 
     function updateDashboard() {
@@ -321,7 +321,7 @@
         if (monthlyChart) monthlyChart.destroy();
         monthlyChart = new Chart(ctx, {
             type: 'bar',
-            data: { labels: Object.keys(data), datasets: [{ label: 'Traslados', data: Object.values(data), backgroundColor: '#2b7a4b' }] },
+            data: { labels: Object.keys(data), datasets: [{ label: 'Traslados', data: Object.values(data), backgroundColor: '#2c5f2d' }] },
             options: { responsive: true, maintainAspectRatio: true }
         });
     }
@@ -332,7 +332,7 @@
         if (vehicleChart) vehicleChart.destroy();
         vehicleChart = new Chart(ctx, {
             type: 'pie',
-            data: { labels: Object.keys(data), datasets: [{ data: Object.values(data), backgroundColor: ['#0f3b2c','#2b7a4b','#4ade80','#86efac','#a3e635'] }] },
+            data: { labels: Object.keys(data), datasets: [{ data: Object.values(data), backgroundColor: ['#2c5f2d','#4ade80','#86efac','#c8b88a','#a3e635'] }] },
             options: { responsive: true, maintainAspectRatio: true }
         });
     }
@@ -340,7 +340,7 @@
     function updateHistoryTable() {
         const tbody = document.getElementById('historyBody');
         if (!transfers.length) {
-            tbody.innerHTML = '<td><td colspan="9" style="text-align: center;">Nenhum traslado encontrado<\/td><\/tr>';
+            tbody.innerHTML = '<tr><td colspan="9" style="text-align: center;">Nenhum traslado encontrado</td></tr>';
             return;
         }
         
@@ -356,22 +356,22 @@
         
         let html = '';
         for (const [monthYear, items] of Object.entries(grouped)) {
-            html += `<tr class="month-group"><td colspan="9"><strong>📅 ${monthYear}</strong> (${items.length} traslados)<\/td><\/tr>`;
+            html += `<tr class="month-group"><td colspan="9"><strong>${monthYear}</strong> (${items.length} traslados)</td></tr>`;
             items.forEach(t => {
                 const telefone = t["Telefone"] || "";
                 const transferJson = JSON.stringify(t).replace(/"/g, '&quot;');
                 html += `
                     <tr>
-                        <td>${t["Data/Hora"] ? new Date(t["Data/Hora"]).toLocaleString('pt-BR') : '-'}<\/td>
-                        <td>${t["Nome"] || '-'}<\/td>
-                        <td>${telefone}<\/td>
-                        <td>${t["Sentido"] || '-'}<\/td>
-                        <td>${t["Veículo"] || '-'}<\/td>
-                        <td>${t["Data Viagem"] || '-'}<\/td>
-                        <td>${t["Horário"] || '-'}<\/td>
-                        <td>R$ ${(parseFloat(t["Valor Total"]) || 0).toLocaleString('pt-BR')}<\/td>
-                        <td><button class="confirm-btn" onclick='enviarConfirmacao(${transferJson})'>✅ Confirmar<\/button><\/td>
-                    <\/tr>
+                        <td>${t["Data/Hora"] ? new Date(t["Data/Hora"]).toLocaleString('pt-BR') : '-'}</td>
+                        <td>${t["Nome"] || '-'}</td>
+                        <td>${telefone}</td>
+                        <td>${t["Sentido"] || '-'}</td>
+                        <td>${t["Veículo"] || '-'}</td>
+                        <td>${t["Data Viagem"] || '-'}</td>
+                        <td>${t["Horário"] || '-'}</td>
+                        <td>R$ ${(parseFloat(t["Valor Total"]) || 0).toLocaleString('pt-BR')}</td>
+                        <td><button class="confirm-btn" onclick='enviarConfirmacao(${transferJson})'>Confirmar</button></td>
+                    </tr>
                 `;
             });
         }
